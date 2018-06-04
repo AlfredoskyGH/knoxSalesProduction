@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head lang="en">
+</head>
+<body>
+<div th:fragment="rolform">
+    <div class="col-lg-12">
+        <hr/>
+    </div>
+    <div class="col-lg-12">
+        <div class="row">
+            <div class="col-lg-12">
+                <form class="form-horizontal" th:object="${rol}"
+                      th:action="@{/sso/aplicacion/rol/guardar}" method="post">
+                    <input type="hidden" th:field="*{aplicationClient.id}"/>
+                    <div class="row">
+                        <div class="form-group col-lg-6">
+                            <label class="control-label">Nombre:</label> <input
+                                type="text" class="form-control"
+                                th:field="*{name}"
+                                placeholder="Nombre Rol" required="required"/>
+                        </div>
+                        <div class="form-group col-lg-3">
+                            <label class="control-label">Tipo:</label> <input
+                                type="text"
+                                class="form-control" th:field="*{type}"
+                                placeholder="Tipo"/>
+                        </div>
+                        <div class="form-group col-lg-1">
+                            <div class="checkbox">
+                                <label> <input type="checkbox"
+                                               th:field="*{enabled}"/>
+                                    Activo
+                                </label>
+                            </div>
+                        </div>
+                        <div class="form-group col-lg-2">
+                            <div class="btn-inline text-right">
+                                <button type="submit"
+                                        class="btn btn-default center-block">Guardar
+                                    Rol
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

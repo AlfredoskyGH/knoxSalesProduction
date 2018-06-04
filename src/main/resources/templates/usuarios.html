@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head lang="en">
+<title>Usuarios - Módulo SSO</title>
+<!--/*/ <th:block th:include="fragments/head :: head"></th:block> /*/-->
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+</head>
+<body>
+	<!--/*/ <th:block th:include="fragments/header :: header"></th:block> /*/-->
+	<div class="row layout">
+		<div class="col-lg-2 layout-left">
+			<!--/*/ <th:block th:include="fragments/layout-left :: layout-left"></th:block> /*/-->
+		</div>
+		<div class="col-lg-8 layout-rigth">
+			<div class="col-lg-12">
+				<nav aria-label="breadcrumb">
+					<ol class="breadcrumb">
+						<li class="breadcrumb-item"><a th:href="@{/sso}">Inicio</a></li>
+						<li class="breadcrumb-item active" aria-current="page">Usuarios</li>
+					</ol>
+				</nav>
+			</div>
+			<div th:fragment="listausuariosinclude">
+				<div class="col-lg-12">
+					<div class="row">
+						<div class="col-lg-12 layout-title">
+							<h3>LISTA DE USUARIOS</h3>
+						</div>
+						<div class="col-lg-12">
+							<br/><br/>
+							<div class="plus">
+								<a href="#" th:href="@{/sso/usuario/new}"> <span
+									class="glyphicon glyphicon-plus-sign ico-colornew"
+									data-toggle="tooltip" title="Nuevo Usuario"></span>
+								</a>
+							</div>
+						</div>
+						<div class="col-lg-12">
+							<table id="myDataTable" class="table table-hover">
+								<thead>
+									<tr>
+										<td align="center"><b>Usuario</b></td>
+										<td align="center"><b>Nombre Completo</b></td>
+										<td align="center"><b>Correo</b></td>
+										<td align="center"><b>Activo</b></td>
+										<td align="center"><b>Ver</b></td>
+										<td align="center"><b>Editar</b></td>
+										<td align="center"><b>Eliminar</b></td>
+									</tr>
+								</thead>
+								<tbody th:if="${#lists.isEmpty(usersSso)}">
+									<tr>
+										<td colspan="7" class="text-center">
+											El sistema aún no contiene usuarios
+										</td>
+									</tr>
+								</tbody>
+								<tbody th:if="${not #lists.isEmpty(usersSso)}">
+									<tr th:each="user:${usersSso}">
+										<td align="center" th:text="${user.username}">Usuario</td>
+										<td align="center"
+											th:text="${user.firstname + ' ' + user.lastname}">Nombre
+											Completo</td>
+										<td align="center" th:text="${user.email}">Correo</td>
+										<td class="text-center">
+											<span th:if="${user.enabled}">Activo</span>
+											<span th:if="${not user.enabled}">Inactivo</span>
+										</td>
+										<td align="center" >
+											<a th:if="not ${user.isAdmin()}" th:href="@{/sso/usuario/} + ${user.id+'/ver'}"> <span
+												class="glyphicon glyphicon-eye-open ico-colorlist"
+												data-toggle="tooltip" title="Ver"></span>
+											</a>
+											<span th:if="${user.isAdmin()}">
+												No Aplica
+											</span>
+										</td>
+										<td align="center"><a
+											th:href="@{/sso/usuario/edit/} + ${user.id}"> <span
+												class="glyphicon glyphicon-pencil ico-colorlist"
+												data-toggle="tooltip" title="Editar"></span>
+										</a></td>
+										<td align="center"><a
+											th:href="@{/sso/usuario/delete/} + ${user.id}" class="delete">
+												<span class="glyphicon glyphicon-remove-sign ico-colorlist"
+												data-toggle="tooltip" title="Eliminar"></span>
+										</a></td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!--/*/ <th:block th:include="fragments/footer :: footer"></th:block> /*/-->
+<script type="text/javascript">
+    $(document).ready(function(){
+
+        $('#myDataTable').DataTable({
+            "ordering": false,
+            "language": {
+                "lengthMenu": "Mostrar _MENU_ registros por página",
+                "zeroRecords": "No hay registros para mostrar",
+                "info": "Página _PAGE_ de _PAGES_",
+                "infoEmpty": "No hay registros disponibles",
+                "infoFiltered": "(Filtrado desde _MAX_ total)",
+                "paginate": {
+                    "previous": "Ant.",
+                    "next": "Sig.",
+                    "first": "Primer"
+                },
+                "search": "Buscar:",
+            }
+        });
+
+    });
+
+</script>
+</body>
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head lang="en">
+<title>Aplicación - Módulo SSO STF</title>
+<!--/*/ <th:block th:include="fragments/head :: head"></th:block> /*/-->
+</head>
+<body>
+	<!--/*/ <th:block th:include="fragments/header :: header"></th:block> /*/-->
+	<div class="row layout">
+		<div class="col-lg-2 layout-left">
+			<!--/*/ <th:block th:include="fragments/layout-left :: layout-left"></th:block> /*/-->
+		</div>
+		<div class="col-lg-8 layout-rigth">
+			<div class="col-lg-12">
+				<nav aria-label="breadcrumb">
+					<ol class="breadcrumb">
+						<li class="breadcrumb-item"><a href="#" th:href="@{/sso}">Home</a></li>
+						<li class="breadcrumb-item"><a href="#"	th:href="@{/sso/aplicaciones}">Aplicaciones</a></li>
+						<li class="breadcrumb-item active">
+							<span href="#" th:text="${aplicacion.name}"></span>
+						</li>
+					</ol>
+				</nav>
+			</div>			
+			<!-- Datos Aplicacion -->
+			<!--/*/ <th:block th:include="aplicacionshow :: aplicacionshow"></th:block> /*/-->
+			
+			<!-- Formulario Rol-->
+			<!--/*/ <th:block th:include="rolform :: rolform"></th:block> /*/-->			
+			
+			<!-- Lista de Roles-->
+			<!--/*/ <th:block th:include="roles :: listarolesinclude"></th:block> /*/-->
+			<div class="col-lg-12">
+				<div class="row">
+					<br/>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!--/*/ <th:block th:include="fragments/footer :: footer"></th:block> /*/-->
+</body>
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head lang="en">
+</head>
+<body>
+	<div th:fragment="usuarioshow">
+		<div class="col-lg-12">
+			<h3>DATOS DE USUARIO</h3>
+			<table class="table table-striped">
+				<tr>
+					<th>Nombres</th>
+					<td th:text="${userSso.firstname}"></td>
+					<th>Apellidos</th>
+					<td th:text="${userSso.lastname}"></td>
+				</tr>
+				<tr>
+					<th>Usuario</th>
+					<td th:text="${userSso.username}"></td>
+					<th>Email</th>
+					<td th:text="${userSso.email}"></td>
+				</tr>
+				<tr>
+					<th>Activo</th>
+					<td colspan="3">
+						<input type="checkbox" th:field="*{userSso.enabled}"
+							   disabled="disabled"/>
+					</td>
+				</tr>
+			</table>
+		</div>
+	</div>
+</body>
+</html>

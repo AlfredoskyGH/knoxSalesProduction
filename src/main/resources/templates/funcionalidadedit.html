@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head lang="en">
+<title>Editar Funcionalidad - Módulo SSO STF</title>
+<!--/*/ <th:block th:include="fragments/head :: head"></th:block> /*/-->
+</head>
+<body>
+	<!--/*/ <th:block th:include="fragments/header :: header"></th:block> /*/-->
+	<div class="row layout">
+		<div class="col-lg-2 layout-left">
+			<!--/*/ <th:block th:include="fragments/layout-left :: layout-left"></th:block> /*/-->
+		</div>
+		<div class="col-lg-8 layout-rigth">
+			<div class="col-lg-12">
+				<nav aria-label="breadcrumb">
+					<ol class="breadcrumb">
+						<li class="breadcrumb-item"><a th:href="@{/sso}">Home</a></li>
+						<li class="breadcrumb-item"><a th:href="@{/sso/aplicaciones}">Aplicaciones</a></li>
+						<li class="breadcrumb-item"><a
+							th:href="@{/sso/aplicacion/} + ${funcionalidad.roleApp.aplicationClient.id+'/ver'}">
+								<span th:text="${funcionalidad.roleApp.aplicationClient.clientId}"></span>
+						</a></li>
+						<li class="breadcrumb-item active"><a
+							th:href="@{/sso/aplicacion} + ${funcionalidad.roleApp.aplicationClient.id+'/rol/'+funcionalidad.roleApp.id+'/ver'}">
+								<span th:text="${funcionalidad.roleApp.name}"></span>
+						</a></li>
+						<li class="breadcrumb-item active" aria-current="page"><span
+							th:text="${funcionalidad.name}"></span></li>
+					</ol>
+				</nav>
+			</div>
+			<div class="col-lg-12">
+				<div class="row">
+					<div class="col-lg-12">
+						<form class="form-horizontal" th:object="${funcionalidad}"
+							th:action="@{/sso/aplicacion/rol/funcionalidad/guardar}" method="post">
+							<input type="hidden" th:field="*{roleApp.aplicationClient.id}" />
+							<input type="hidden" th:field="*{roleApp.id}" /> <input
+								type="hidden" th:field="*{id}" /> <label class="control-label"
+								th:value="${mensaje}"></label>
+							<div class="row">
+								<div class="form-group col-lg-12">
+									<h3>DATOS DE LA FUNCIONALIDAD</h3>
+								</div>
+							</div>
+							<div class="row">
+								<div class="form-group col-lg-10">
+									<label class="control-label">Nombre:</label> <input type="text"
+										class="form-control" th:field="*{name}"
+										placeholder="Nombre Funcionalidad" required="required" maxlength="50"/>
+								</div>
+								<div class="form-group col-lg-2">
+									<div class="checkbox">
+										<label> <input type="checkbox" th:field="*{enabled}" />
+											Activa
+										</label>
+									</div>
+								</div>
+							</div>
+							<div class="row">
+								<div class="form-group col-lg-12">
+									<button type="submit" class="btn btn-default center-block">Guardar
+										Funcionalidad</button>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!--/*/ <th:block th:include="fragments/footer :: footer"></th:block> /*/-->
+</body>
+</html>

@@ -1,0 +1,14 @@
+Formato csv Carga Masiva SSO STFGroup;;;;;
+<usuario>;;;;;
+Usuario;Nombre;Apellido;Correo;Estatus;Activo Hasta
+dsanchez;Daniel;Sanchez;d.sanchez@innova4j.com;A;2018-02-02
+;;;;;
+<aplicaciones>;;;;;
+Nombre;Clave Secreta;Recurso;Alcance;Estatus;Url Redireccion
+App 1;12345;Recurso;Alcance;A;google.com
+;;;;;
+<roles>;;;;;
+Nombre;Tipo;Estatus;;;
+Rol Prueba;Administrador;A;;;
+;;;;;
+</usuario>;;;;;

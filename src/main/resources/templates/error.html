@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head lang="en">
+    <title>Gestión de Contraseña</title>
+    <!--/*/ <th:block th:include="fragments/head :: head"></th:block> /*/-->
+</head>
+<body>
+<!--/*/ <th:block th:include="fragments/header :: header"></th:block> /*/-->
+<div th:if="${error == 'BadClientCredentials' }" class="row layout" style="width: 400px; margin: 0 auto;">
+    <div class="uk-vertical-align-middle">
+        <div class="row titleForm">
+            <p>Error de Credenciales Cliente</p>
+        </div>
+        <div class="row bodyForm">
+
+        </div>
+    </div>
+</div>
+<!--/*/ <th:block th:include="fragments/footer :: footer"></th:block> /*/-->
+</body>
+</html>

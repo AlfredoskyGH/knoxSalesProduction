@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head lang="en">
+</head>
+<body>
+	<div th:fragment="rolshow">
+		<div class="col-lg-12">
+			<h3 th:text="${'APLICACION: '+aplicacion.name}">Datos Aplicacion</h3>
+			<h3 th:text="${'ROL: '+rol.name}">Datos Rol</h3>
+			<div class="row">
+				<div class="col-lg-12">
+					<table class="table table-striped">
+						<tr>
+							<th>Tipo</th>
+							<td th:text="${rol.type}"></td>
+							<th>Activo</th>
+							<td>
+								<input type="checkbox" th:field="*{rol.enabled}" disabled="disabled"/>
+							</td>
+						</tr>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

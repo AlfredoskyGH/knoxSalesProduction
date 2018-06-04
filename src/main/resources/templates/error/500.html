@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Módulo SSO - Error 500</title>
+<!--/*/ <th:block th:include="fragments/head :: head"></th:block> /*/-->
+<!-- <link href="../static/css/login-style.css"
+	th:href="@{/css/login-style.css}" rel="stylesheet" media="screen" /> -->
+</head>
+<body>
+	<!--/*/ <th:block th:include="fragments/headerlogin :: headerlogin"></th:block> /*/-->
+	<div class="row layout" style="margin: 0 auto;">
+		<div class="uk-vertical-align-middle">
+			<div class="row">
+				<div class="col-lg-12" style="text-align: center !important; padding-top: 10%;">
+					<div class="row">
+						<div class="col-lg-12" style="font-size: 12em !important;">
+							<!--<span class="glyphicon glyphicon-exclamation-sign" data-toggle="tooltip" title="Aviso"></span>-->
+							<span data-toggle="tooltip" title="Error 500">500</span>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-lg-12 layout-title">
+							<h3>Error interno del Servidor.</h3>
+							<hr/>
+						</div>
+						<div class="col-lg-12">
+							<h4>Comuníquese con el administrador del sistema.</h4>
+							<a style="color: #101010 !important; font-weight: 600 !important;" th:href="@{/sso}">Volver a inicio.</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

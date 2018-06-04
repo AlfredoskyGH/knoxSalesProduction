@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Login Módulo SSO STFGroup</title>
+<!--/*/ <th:block th:include="fragments/head :: head"></th:block> /*/-->
+</head>
+<body>
+<div class="modal loader"></div>
+	<!--/*/ <th:block th:include="fragments/headerlogin :: headerlogin"></th:block> /*/-->
+	<div class="row layout" style="width: 400px; margin: 0 auto;">
+		<div class="uk-vertical-align-middle">
+
+			<div class="login-form-1">
+				<form id="login-form" class="text-left" method="POST" name="f"
+					th:action="@{/login}">
+					<div class="row titleForm">
+						<p>SISTEMA DE AUTENTICACI&Oacute;N</p>
+					</div>
+					<div class="row bodyForm">
+						<div class="login-group">
+							<div class="form-group col-lg-12">
+								<input type="text" class="form-control" id="username"
+									name="username" placeholder="Usuario o correo" required="required" />
+							</div>
+							<div class="form-group col-lg-12">
+								<input type="password" class="form-control" id="password"
+									name="password" placeholder="Contraseña" required="required" />
+							</div>
+							<div class="form-group col-lg-12 clearfix" style="text-align: center">
+            					<label class="pull-left checkbox-inline"><input type="checkbox"/>Recordar</label>
+            					<a th:href="@{/password/olvido}"> ¿Olvid&oacute; o Cambio de contrase&ntilde;a?</a>
+        					</div>  
+						</div>
+						<input type="hidden" name="${_csrf.parameterName}"
+							value="${_csrf.token}" />
+						<button id="btnCargar" name="btnCargar" type="submit" class="btn-login">INGRESAR</button>
+					</div>
+					<div th:if="${param.error}" class="row" style=" text-align:  center; padding: 10px;
+															background-color: #bb4a4a; color: white; font-weight: 400;
+															border-radius: 0 0 20px 20px !important;">
+						<p th:text="${errorLogin}" th:unless="${errorLogin == null}"></p>
+						<p th:if="${errorLogin == null}" th:text="${param.error}"></p>
+					</div>
+				</form>
+			</div>
+			<!-- end:Main Form -->
+		</div>
+	</div>
+
+<script   src="https://code.jquery.com/jquery-3.3.1.min.js"   integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="   crossorigin="anonymous"></script>
+
+<script type="text/javascript">
+
+    $(document).ready(function(){
+
+        $("#btnCargar").click(function () {
+			$("body").addClass("loading");
+        });
+
+    });
+
+</script>
+</body>
+</html>

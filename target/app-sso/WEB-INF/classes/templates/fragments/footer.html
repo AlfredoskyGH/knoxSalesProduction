@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head lang="en">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+</head>
+
+<body>
+
+<footer th:fragment="footer">
+    <!--<script src="/js/materialize.min.js" rel="script"/>-->
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.min.js"/>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <script src="/js/datepicker/bootstrap-datepicker.js" rel="script"/>
+    <script src="/js/datepicker/bootstrap-datepicker.es.min.js" rel="script"/>
+    <script src="/js/jquery.mask.js" rel="script"/>
+    <script src="/js/jquery-confirm.min.js" rel="script"/>
+    <script src="/js/jquery-datatable.bootstrap.min.js" rel="script"/>
+    <script src="/js/jquery-datatable.min.js" rel="script"/>
+    <script src="/js/alertify/alertify.js" rel="script"/>
+    <script src="/js/validator.js" rel="script"/>
+
+    <script th:inline="javascript">
+        /*<![CDATA[*/
+
+        $( document ).ready(function() {
+            if(document.getElementById('_ispostback').value == 'True')
+            {
+                console.log("acaba de hacer postback");
+            }else{
+                console.log("dejo de hacer postback");
+            }
+        });
+
+        $(document).ready(function(){
+            $('.datatable-sso').DataTable({
+                "ordering": false,
+                "language": {
+                    "lengthMenu": "Mostrar _MENU_ registros por pagina",
+                    "zeroRecords": "No hay registros para mostrar",
+                    "info": "Página _PAGE_ de _PAGES_",
+                    "infoEmpty": "No hay registros disponibles",
+                    "infoFiltered": "(Filtrado desde _MAX_ total)",
+                    "paginate": {
+                        "previous": "Ant.",
+                        "next": "Sig.",
+                        "first": "Primer"
+                    },
+                    "search": "Buscar:",
+                }
+            });
+
+            $('.formValidator').validator();
+
+        });
+        
+        $(".datepicker").datepicker({
+            format: "dd/mm/yyyy",
+            language: "es",
+            autoclose: true,
+            todayHighlight: true,
+            orientation: "bottom auto",
+        });
+        
+
+        $('.number-mask').mask("A", {
+        translation: {
+        "A": { pattern: /[0-9]/, recursive: true }
+        }
+        });
+
+        $('.date-mask').mask('00/00/0000');
+
+        $('.email-mask').mask("A", {
+            translation: {
+                "A": { pattern: /[\w@\-.+]/, recursive: true }
+            }
+        });
+
+        $('a.delete').confirm({
+            title: 'Confirmación',
+            content: '¿Desea eliminar este Elemento?',
+            theme: 'black',
+            buttons: {
+                aceptar: {
+                    text: 'Aceptar', // With spaces and symbols
+                        action: function () {
+                            location.href = this.$target.attr('href');
+                    }
+                },
+                cancelar: {
+                    text: 'Cancelar', // With spaces and symbols
+                    action: function () {
+                        return true;
+                    }
+                }
+            },
+            animation: 'zoom',
+            autoclose: false
+//                columnClass: 'col-md-6 col-md-offset-4'
+        });
+
+        function showNotification(notification) {
+            var tipo= notification.type;
+            var estatus = notification.status;
+            var mensaje = notification.message;
+            var title = notification.title;
+
+            if (tipo == "1"){
+                switch(estatus) {
+                    case "MESSAGE":
+                        alertify.message(mensaje);
+                        break;
+                    case "WARNING":
+                        alertify.warning(mensaje);
+                        break;
+                    case "ERROR":
+                        alertify.error(mensaje);
+                        break;
+                    case "SUCCESS":
+                        alertify.success(mensaje);
+                        break;
+                }
+            }
+        }
+
+        /*]]>*/
+    </script>
+
+    <script th:if="${not #lists.isEmpty(notification)}" th:inline="javascript">
+        /*<![CDATA[*/
+
+        var notification = /*[[${notification}]]*/ 'notification';
+        showNotification(notification);
+
+        /*]]>*/
+    </script>
+
+
+</footer>
+
+
+
+
+</body>
+</html>

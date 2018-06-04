@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head lang="en">
+    <title>Inicio</title>
+    <link href="/css/fileinput.css" rel="stylesheet" media="screen"/>
+    <!--/*/ <th:block th:include="fragments/head :: head"></th:block> /*/-->
+</head>
+<body>
+<!--/*/ <th:block th:include="fragments/header :: header"></th:block> /*/-->
+<div class="row layout">
+    <div class="col-lg-2 layout-left">
+        <!--/*/ <th:block th:include="fragments/layout-left :: layout-left"></th:block> /*/-->
+    </div>
+    <div class="col-lg-8 layout-rigth">
+        <div class="col-lg-12">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a th:href="@{/sso}">Inicio</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Planificador de Consulta</li>
+                </ol>
+            </nav>
+        </div>
+        <div class="col-lg-12">
+            <div class="row">
+                <div class="col-lg-12 layout-title">
+                    <h3>PROGRAMAR TAREAS</h3>
+                </div>
+                <div class="col-lg-12">
+                    <form class="form-horizontal" th:object="${schedule}" th:action="@{/sso/planificador}" method="post">
+                        <input type="hidden" th:field="*{id}" />
+                        <input type="hidden" th:field="*{periodicity}" value="" />
+
+                        <div class="row">
+                            <div class="form-group col-lg-2">
+                                <label class="control-label"><b>Tarea:</b></label>
+                            </div>
+                            <div class="form-group col-lg-10">
+                                <label class="control-label">Consulta de estados de Usuarios (Active Directory)</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-lg-2">
+                                <label class="control-label">Diariamente:</label>
+                            </div>
+                            <div class="form-group col-lg-10">
+                                <div th:object="${days}" required="required">
+                                    <label class="checkbox-inline"><input th:field="*{monday}" type="checkbox" value="Lun"/>Lunes</label>
+                                    <label class="checkbox-inline"><input th:field="*{tuesday}" type="checkbox" value="Mar"/>Martes</label>
+                                    <label class="checkbox-inline"><input th:field="*{wednesday}" type="checkbox" value="Mie"/>Miercoles</label>
+                                    <label class="checkbox-inline"><input th:field="*{thursday}" type="checkbox" value="Jue"/>Jueves</label>
+                                    <label class="checkbox-inline"><input th:field="*{friday}" type="checkbox" value="Vie"/>Viernes</label>
+                                    <label class="checkbox-inline"><input th:field="*{saturday}" type="checkbox" value="Sab"/>Sabado</label>
+                                    <label class="checkbox-inline"><input th:field="*{sunday}" type="checkbox" value="Dom"/>Domingo</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-lg-2">
+                                <label class="control-label"><b>Horario:</b></label>
+                            </div>
+                            <div class="form-group col-lg-2">
+                                <div class="form-group">
+                                    <!--<label for="listHoras">Hora:</label>-->
+                                    <select class="form-control" id="listHoras" th:field="*{hours}" required="required">
+                                        <option value="" selected="selected">Hora</option>
+                                        <option value="1">01</option>
+                                        <option value="2">02</option>
+                                        <option value="3">03</option>
+                                        <option value="4">04</option>
+                                        <option value="5">05</option>
+                                        <option value="6">06</option>
+                                        <option value="7">07</option>
+                                        <option value="8">08</option>
+                                        <option value="9">09</option>
+                                        <option value="10">10</option>
+                                        <option value="11">11</option>
+                                        <option value="12">12</option>
+                                        <option value="13">13</option>
+                                        <option value="14">14</option>
+                                        <option value="15">15</option>
+                                        <option value="16">16</option>
+                                        <option value="17">17</option>
+                                        <option value="18">18</option>
+                                        <option value="19">19</option>
+                                        <option value="20">20</option>
+                                        <option value="21">21</option>
+                                        <option value="22">22</option>
+                                        <option value="23">23</option>
+                                        <option value="0">24</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group col-lg-2">
+                                <div class="form-group">
+                                    <!--<label for="listMinutos">Minutos:</label>-->
+                                    <select class="form-control" id="listMinutos" th:field="*{minutes}" required="required">
+                                        <option value="" selected="selected">Minutos</option>
+                                        <option value="0">00</option>
+                                        <option value="15">15</option>
+                                        <option value="30">30</option>
+                                        <option value="45">45</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group col-lg-2">
+                                <div class="checkbox" style="padding-top: 5px !important;">
+                                    <label> <input type="checkbox" th:field="*{enabled}" />
+                                        Activa
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-lg-12">
+                                <button type="submit" class="btn btn-default center-block">Guardar</button>
+                            </div>
+                        </div>
+                    </form>
+                    <hr/>
+                    <div class="row">
+                        <div th:fragment="listaplanificacionesinclude">
+                            <div class="col-lg-12">
+                                <div class="row">
+                                    <div class="col-lg-12 layout-title">
+                                        <h4>TAREAS REGISTRADAS</h4>
+                                    </div>
+                                    <div class="col-lg-12">
+                                        <table class="table table-hover">
+                                            <thead>
+                                            <tr>
+                                                <td class="text-center"><b>Nombre</b></td>
+                                                <td class="text-center"><b>Frecuencia</b></td>
+                                                <td class="text-center"><b>D&iacute;as</b></td>
+                                                <td class="text-center"><b>Hora(s)</b></td>
+                                                <td class="text-center"><b>Minutos(s)</b></td>
+                                                <td class="text-center"><b>Fecha de Creaci&oacute;n</b></td>
+                                                <td class="text-center"><b>Estado</b></td>
+                                                <td class="text-center"><b>Editar</b></td>
+                                                <td class="text-center"><b>Eliminar</b></td>
+                                            </tr>
+                                            </thead>
+                                            <div th:if="${#lists.isEmpty(listSchedule)}">
+                                                <tbody>
+                                                <tr>
+                                                    <td colspan="9" class="text-center">
+                                                        Aun no hay tareas registradas...
+                                                    </td>
+                                                </tr>
+                                                </tbody>
+                                            </div>
+                                            <div th:if="${not #lists.isEmpty(listSchedule)}">
+                                                <tbody>
+                                                <tr th:each="schedule : ${listSchedule}">
+                                                    <td class="text-center" th:text="${schedule.name}">Nombre</td>
+                                                    <td class="text-center" th:text="${schedule.periodicity}">Frecuencia</td>
+                                                    <td class="text-center" th:text="${schedule.days}">D&iacute;as</td>
+                                                    <td class="text-center" th:text="${schedule.hours}">Hora(s)</td>
+                                                    <td class="text-center" th:text="${schedule.minutes}">Minuto(s)</td>
+                                                    <td class="text-center" th:text="${schedule.created}">Fecha de Creaci&oacute;n</td>
+                                                    <td class="text-center">
+                                                        <span th:if="${schedule.enabled}">Activa</span>
+                                                        <span th:if="${not schedule.enabled}">Inactiva</span>
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <a th:href="@{/sso/planificador/edit/} + ${schedule.id}">
+                                                <span class="glyphicon glyphicon-pencil ico-colorlist"
+                                                      data-toggle="tooltip" title="Editar"></span>
+                                                        </a>
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <a th:href="@{/sso/planificador/delete/} + ${schedule.id}" class="delete">
+                                                <span class="glyphicon glyphicon-remove-sign ico-colorlist"
+                                                      data-toggle="tooltip" title="Eliminar"></span>
+                                                        </a>
+                                                    </td>
+                                                </tr>
+                                                </tbody>
+                                            </div>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+<!--/*/ <th:block th:include="fragments/footer :: footer"></th:block> /*/-->
+
+<script type="text/javascript">
+
+    $(document).ready(function(){
+
+
+        $('.daySelect').click(function () {
+            console.log(this);
+            $('#dias').value(this.value());
+
+        })
+
+    });
+
+</script>
+</body>
+</html>

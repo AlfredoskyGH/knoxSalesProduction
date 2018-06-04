@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head lang="en">
+</head>
+<body>
+<div th:fragment="layout-left">
+    <ul class="nav flex-column">
+        <li class="nav-item nav-item-title text-center">MENU</li>
+        <li class="nav-item black">
+            <a class="nav-link" th:href="@{/sso/aplicaciones}">APLICACIONES</a>
+        </li>
+        <li class="nav-item black">
+            <a class="nav-link" th:href="@{/sso/usuarios}">USUARIOS</a>
+        </li>
+        <li class="nav-item black">
+            <a class="nav-link" th:href="@{/sso/cargar/usuarios}">CARGAR USUARIOS</a>
+        </li>
+        <li class="nav-item black">
+            <a class="nav-link" th:href="@{/sso/planificador}">PLANIFICADOR DE TAREA</a>
+        </li>
+    </ul>
+
+    <script type="text/javascript">
+        /**
+         * Función encargada de manipular de forma dinámica la activación de los
+         * items del menú. Se hace uso de los prefijos de la url para
+         * identificar el item padre que debe estar activo.
+         *
+         * aplicacion -> aplicacion/*
+         * usuario -> usuario/*
+         *
+         * El elemento de la parte izquierda estará activo siempre que la url
+         * coincida con el patrón definido.
+         */
+        $(document).ready(function () {
+            //obtiene la url actual
+            var pattern = window.location.href;
+            //filtra todos los items del menú
+            $('ul.nav a').filter(function() {
+                //retorna el item que coincida con la url actual(pattern)
+                return pattern.match(this.href);
+            }).addClass('active');//agrega la clase .active al item actual
+        });
+    </script>
+</div>
+</body>
+</html>

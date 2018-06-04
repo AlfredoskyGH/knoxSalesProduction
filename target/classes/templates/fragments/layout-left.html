@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head lang="en">
+</head>
+<body>
+<div class="modal"><!-- Place at bottom of page --></div>
+<div th:fragment="layout-left">
+    <ul class="nav flex-column">
+        <li class="nav-item nav-item-title text-center">MENU</li>
+        <li class="nav-item black">
+            <a class="nav-link" th:href="@{/sso/aplicaciones}">APLICACIONES</a>
+        </li>
+        <li class="nav-item black">
+            <a class="nav-link" th:href="@{/sso/usuarios}">USUARIOS</a>
+        </li>
+        <li class="nav-item black">
+            <a class="nav-link" th:href="@{/sso/cargar/usuarios}">CARGAR USUARIOS</a>
+        </li>
+        <li class="nav-item black">
+            <a class="nav-link" th:href="@{/sso/planificador}">PLANIFICADOR DE TAREA</a>
+        </li>
+    </ul>
+</div>
+</body>
+</html>

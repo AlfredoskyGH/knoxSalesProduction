@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head lang="en">
+    <title>Inicio</title>
+    <link href="/css/fileinput.css" rel="stylesheet" media="screen"/>
+    <!--/*/ <th:block th:include="fragments/head :: head"></th:block> /*/-->
+</head>
+<body>
+<!--/*/ <th:block th:include="fragments/header :: header"></th:block> /*/-->
+<div class="modal loader"></div>
+<div class="row layout">
+    <div class="col-lg-2 layout-left">
+        <!--/*/ <th:block th:include="fragments/layout-left :: layout-left"></th:block> /*/-->
+    </div>
+    <div class="col-lg-8 layout-rigth">
+        <div class="col-lg-12">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a th:href="@{/sso}">Inicio</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Cargar Usuarios</li>
+                </ol>
+            </nav>
+        </div>
+        <div class="col-lg-12">
+            <div class="row">
+                <div class="col-lg-12 layout-title">
+                    <h3>CARGA DE USUARIOS</h3>
+                </div>
+            </div>
+            <div class="row">
+				<div class="col-lg-12">
+				    <h5>Selecci&oacute;n de archivo (.csv):</h5>
+				</div>
+            </div>
+            <div class="row">
+            	<form th:action="@{/sso/procesar/archivo}" enctype="multipart/form-data" method="post">
+                    <div class="col-lg-8">
+                        <div class="file-loading">
+                            <input id="myFileInput" name="file" type="file" class='file fileInput' accept="text/csv" required="required"/>
+                            <!--<input id="input-21" type="file" accept="image/*" />-->
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <input type="Submit" id="btnCargar" name="btnCargar" value="Cargar y Procesar" class="btn btn-default"/>
+                    </div>
+                </form>
+            </div>
+            <div class="row">
+                <div th:if="${file != null}">
+                    <!--<form th:object="${file}" th:action="@{/usuarios/guardar}" method="post">-->
+                        <div class="col-lg-12">
+                            <div class="row">
+                                <div th:if="${not #lists.isEmpty(file.errorField)}" class="col-lg-12 layout-title">
+                                    <!--AGREGAR INFORMACION TOTAL, PROCESADOS Y NO PROCESADOS-->
+                                    <h5>
+                                        <a data-toggle="modal" style="float: right" data-target="#myModal" href="#myModal">
+                                            <i class="glyphicon glyphicon-eye-open" data-toggle="tooltip" title="Ver"></i>
+                                            Datos de Archivo NO Procesados...
+                                        </a>
+                                    </h5>
+                                </div>
+                                <div class="col-lg-12">
+                                    <table id="myDataTable" class="table table-striped table-bordered">
+                                        <thead>
+                                        <tr>
+                                            <th align="center">Usuario</th>
+                                            <th align="center">Nombre Completo</th>
+                                            <th align="center">Aplicacion</th>
+                                            <th align="center">Estatus</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody id="myTable">
+                                        <tr th:each="user : ${file.getUsersLoad()}">
+                                            <td align="center" th:text="${user.username}">Usuario</td>
+                                            <td align="center" th:text="${user.firstname + ' ' + user.lastname}">Nombre
+                                                Completo
+                                            </td>
+                                            <td align="center" th:text="${user.email}">Correo</td>
+                                            <td align="center" th:text="${ (user.enabled) ? 'Activo' : 'Inactivo' }">
+                                                Activo
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+
+                    <!-- Modal -->
+                    <div id="myModal" class="modal fade" role="dialog">
+                        <div class="modal-dialog">
+                            <!-- Modal content-->
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                    <h4 class="modal-title">Registros no Procesados</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <p>Detalle.</p>
+                                    <table>
+                                        <tr th:each="item : ${file.getErrorField()}">
+                                            <td th:text="${item}"></td>
+                                        </tr>
+                                    </table>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--</form>-->
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+<!--/*/ <th:block th:include="fragments/footer :: footer"></th:block> /*/-->
+
+<script src="/js/fileinput.js" rel="script"/>
+
+<script type="text/javascript">
+
+    $("#myFileInput").fileinput({
+        maxFileCount: 1,
+        browseLabel: 'Examinar...',
+        removeClass: "btn btn-danger",
+        removeLabel: "Cancelar",
+        showCaption: true,
+        showUpload: false,
+        allowedFileExtensions: ["csv"]
+    });
+
+    $(document).ready(function(){
+
+        $('#myDataTable').DataTable({
+            "ordering": false,
+            "language": {
+                "lengthMenu": "Mostrar _MENU_ registros por pagina",
+                "zeroRecords": "No hay registros para mostrar",
+                "info": "Página _PAGE_ de _PAGES_",
+                "infoEmpty": "No hay registros disponibles",
+                "infoFiltered": "(Filtrado desde _MAX_ total)",
+                "paginate": {
+                    "previous": "Ant.",
+                    "next": "Sig.",
+                    "first": "Primer"
+                },
+                "search": "Buscar:",
+            }
+        });
+
+        $("#btnCargar").click(function () {
+            var text = $(".fileInput").val();
+            if(! text.toString().trim()==""){
+                $("body").addClass("loading");
+            }
+        });
+
+        $('.fileinput-remove').click(function () {
+            /*Para limpiar el file Input debe generarse un postback en la pagina*/
+            location.reload();
+        });
+
+    });
+
+</script>
+
+
+
+</body>
+</html>

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head lang="en">
+<title>Usuario - Modulo SSO</title>
+<!--/*/ <th:block th:include="fragments/head :: head"></th:block> /*/-->
+</head>
+<body>
+	<!--/*/ <th:block th:include="fragments/header :: header"></th:block> /*/-->
+	<div class="row layout">
+		<div class="col-lg-2 layout-left">
+			<!--/*/ <th:block th:include="fragments/layout-left :: layout-left"></th:block> /*/-->
+		</div>
+		<div class="col-lg-8 layout-rigth">
+			<div class="col-lg-12">
+				<nav aria-label="breadcrumb">
+					<ol class="breadcrumb">
+						<li class="breadcrumb-item"><a th:href="@{/sso}">Inicio</a></li>
+						<li class="breadcrumb-item"><a th:href="@{/sso/usuarios}">Usuarios</a></li>
+						<li class="breadcrumb-item active" aria-current="page">
+							<span th:if="${userSso.username != null}" th:text="${userSso.username}"></span>
+							<span th:if="${userSso.username == null}">Nuevo Usuario</span>
+						</li>
+					</ol>
+				</nav>
+			</div>
+			<div class="col-lg-12">
+				<div class="row">
+					<div class="col-sm-12 layout-title">
+						<h3>DATOS DEL USUARIO</h3>
+					</div>
+				</div>
+				<div class="col-lg-12">
+					<div>
+						<form class="form-horizontal" th:object="${userSso}" th:action="@{/sso/usuario}" method="post">
+							<input type="hidden" th:field="*{id}" />
+							<input type="hidden" th:field="*{password}" />
+							<div class="row">
+								<div class="form-group col-lg-4">
+									<label class="control-label">Usuario:</label>
+									<div>
+										<input type="text" class="form-control" th:field="*{username}"
+											required="required" placeholder="Usuario" maxlength="100"/>
+									</div>
+								</div>
+								<div class="form-group col-lg-4">
+									<label class="control-label">Nombre:</label>
+									<div>
+										<input type="text" class="form-control"
+											th:field="*{firstname}" placeholder="Nombre" maxlength="100"/>
+									</div>
+								</div>
+								<div class="form-group col-lg-4">
+									<label class="control-label">Apellido:</label>
+									<div>
+										<input type="text" class="form-control" 
+										th:field="*{lastname}" placeholder="Apellido" maxlength="100"/>
+									</div>
+								</div>
+							</div>
+							<div class="row">
+								<div class="form-group col-lg-6">
+									<label class="control-label">Correo:</label>
+									<div>
+										<input type="email" class="form-control email-mask"
+											th:field="*{email}" required="required" placeholder="Ej: usuario@ejemplo.com" maxlength="100"/>
+									</div>
+								</div>
+								<div class="form-group col-lg-4">
+									<label class="control-label">Activo Hasta:</label>
+									<div class="input-group input-append date datepicker">
+										<input type="text" class="form-control" th:field="*{userActiveUntil}" placeholder="Activo Hasta"/>
+										<!-- <input type="text"  th:field="*{fecha}" 
+										th:value="${#strings.isEmpty(test.fecha)? test.fecha : #dates.format(test.fecha, 'dd/mm/yyyy') }"/> --> 
+										<span class="input-group-addon add-on">
+											<span class="glyphicon glyphicon-calendar"></span>
+										</span>
+									</div>
+								</div>
+								<div class="form-group col-lg-2">
+									<div class="checkbox">
+										<label>
+											<input type="checkbox" th:field="*{enabled}"/>
+											Activo
+										</label>
+									</div>
+                            	</div>
+							</div>
+							<div class="row">
+								<div class="form-group col-lg-12">
+									<button type="submit" class="btn btn-default center-block">Guardar</button>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!--/*/ <th:block th:include="fragments/footer :: footer"></th:block> /*/-->
+</body>
+</html>

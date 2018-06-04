@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head lang="en">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+</head>
+
+<body>
+
+<footer th:fragment="footer">
+    <!--<script src="/js/materialize.min.js" rel="script"/>-->
+    <script th:src="@{/js/jquery-3.3.1.min.js}" rel="script"/>
+    <script th:src="@{/js/bootstrap.min.js}" rel="script"/>
+    <script th:src="@{/js/datepicker/bootstrap-datepicker.js}" rel="script"/>
+    <script th:src="@{/js/datepicker/bootstrap-datepicker.es.min.js}" rel="script"/>
+    <script th:src="@{/js/jquery.mask.js}" rel="script"/>
+    <script th:src="@{/js/jquery-confirm.min.js}" rel="script"/>
+    <script th:src="@{/js/jquery.dataTables.min.js}" rel="script"/>
+    <script th:src="@{/js/alertify/alertify.js}" rel="script"/>
+    <script th:src="@{/js/validator.js}" rel="script"/>
+    <script th:src="@{/js/fileinput.js}" rel="script"/>
+
+    <script th:inline="javascript">
+        /*<![CDATA[*/
+
+        /**
+         * Función encargada de manipular de forma dinámica la activación de los
+         * items del menú. Se hace uso de los prefijos de la url para
+         * identificar el item padre que debe estar activo.
+         *
+         * aplicacion -> aplicacion/*
+         * usuario -> usuario/*
+         *
+         * El elemento de la parte izquierda estará activo siempre que la url
+         * coincida con el patrón definido.
+         */
+
+        $(document).ready(function(){
+            //obtiene la url actual
+            var pattern = window.location.href;
+            //filtra todos los items del menú
+            $('ul.nav a').filter(function() {
+                //retorna el item que coincida con la url actual(pattern)
+                return pattern.match(this.href);
+            }).addClass('active');//agrega la clase .active al item actual
+
+            $('.formValidator').validator();
+
+        });
+        
+        $(".datepicker").datepicker({
+            format: "dd/mm/yyyy",
+            language: "es",
+            autoclose: true,
+            todayHighlight: true,
+            orientation: "bottom auto",
+        });
+        
+
+        $('.number-mask').mask("A", {
+        translation: {
+        "A": { pattern: /[0-9]/, recursive: true }
+        }
+        });
+
+        $('.date-mask').mask('00/00/0000');
+
+        $('.email-mask').mask("A", {
+            translation: {
+                "A": { pattern: /[\w@\-.+]/, recursive: true }
+            }
+        });
+
+        $('a.delete').confirm({
+            title: 'Confirmación',
+            content: '¿Desea eliminar este Elemento?',
+            theme: 'black',
+            buttons: {
+                aceptar: {
+                    text: 'Aceptar', // With spaces and symbols
+                        action: function () {
+                            location.href = this.$target.attr('href');
+                    }
+                },
+                cancelar: {
+                    text: 'Cancelar', // With spaces and symbols
+                    action: function () {
+                        return true;
+                    }
+                }
+            },
+            animation: 'zoom',
+            autoclose: false
+//                columnClass: 'col-md-6 col-md-offset-4'
+        });
+
+        function showNotification(notification) {
+            var tipo= notification.type;
+            var estatus = notification.status;
+            var mensaje = notification.message;
+            var title = notification.title;
+
+            if (tipo == "1"){
+                switch(estatus) {
+                    case "MESSAGE":
+                        alertify.message(mensaje);
+                        break;
+                    case "WARNING":
+                        alertify.warning(mensaje);
+                        break;
+                    case "ERROR":
+                        alertify.error(mensaje);
+                        break;
+                    case "SUCCESS":
+                        alertify.success(mensaje);
+                        break;
+                }
+            }
+        }
+
+        /*]]>*/
+    </script>
+
+    <script th:if="${not #lists.isEmpty(notification)}" th:inline="javascript">
+        /*<![CDATA[*/
+
+        var notification = /*[[${notification}]]*/ 'notification';
+        showNotification(notification);
+
+        /*]]>*/
+    </script>
+
+
+</footer>
+
+
+
+
+</body>
+</html>

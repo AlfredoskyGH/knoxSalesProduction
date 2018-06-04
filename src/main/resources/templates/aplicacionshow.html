@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head lang="en">
+<title>Spring Boot CRUD Modulo SSO</title>
+<!--/*/ <th:block th:include="fragments/head :: head"></th:block> /*/-->
+</head>
+<body>
+	<!--/*/ <th:block th:include="fragments/header :: header"></th:block> /*/-->
+	<div class="row layout">
+		<div class="col-lg-2 layout-left">
+			<!--/*/ <th:block th:include="fragments/layout-left :: layout-left"></th:block> /*/-->
+		</div>
+		<div class="col-lg-8 layout-rigth">
+			<div class="col-lg-12">
+				<nav aria-label="breadcrumb">
+					<ol class="breadcrumb">
+						<li class="breadcrumb-item"><a href="#" th:href="@{/sso}">Home</a></li>
+						<li class="breadcrumb-item"><a href="#"	th:href="@{/sso/aplicaciones}">Aplicaciones</a></li>
+						<li class="breadcrumb-item active" aria-current="page"><span th:text="${aplicacion.clientId}"></span></li>
+					</ol>
+				</nav>
+			</div>
+			<div th:fragment="aplicacionshow">
+				<div class="col-lg-12">
+					<div class="row">
+						<div class="col-lg-12">
+							<h3>APLICACION</h3>
+							<form class="form-horizontal">
+								<input type="hidden" th:field="*{aplicacion.id}" />
+								<div class="row">
+									<table class="table table-striped">
+										<tr>
+											<th>Identificador</th>
+											<td th:text="${aplicacion.clientId}"></td>
+											<th>Nombre</th>
+											<td th:text="${aplicacion.name}"></td>
+										</tr>
+										<tr>
+											<th>Clave Secreta:</th>
+											<td th:text="${aplicacion.secret}"></td>
+											<th>Activa</th>
+											<td>
+												<input type="checkbox" th:field="*{aplicacion.enabled}" disabled="disabled"/>
+											</td>
+										</tr>
+										<tr>
+											<th>Tiempo de Validez del Token(seg):</th>
+											<td th:text="${aplicacion.accessTokenValiditySeconds}"></td>
+											<th>Tiempo para Refrescar Token(seg):</th>
+											<td th:text="${aplicacion.refreshTokenValiditySeconds}"></td>
+										</tr>
+										<tr>
+											<th>URL de Redirección:</th>
+											<td th:text="${aplicacion.webServerRedirectUri}" colspan="3"></td>
+										</tr>
+									</table>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-lg-12">
+				<div class="row text-center">
+					<a href="#" class="btn btn-default" th:href="@{/sso/aplicaciones}" role="button">Aceptar</a>
+				</div>
+			</div>
+			<div class="col-lg-12">
+				<div class="row">
+					<p></p>
+					<p></p>
+				</div>
+			</div>
+		</div>
+	</div>
+<!--/*/ <th:block th:include="fragments/footer :: footer"></th:block> /*/-->	
+</body>
+</html>

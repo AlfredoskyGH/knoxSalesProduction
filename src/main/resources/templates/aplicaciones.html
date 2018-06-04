@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head lang="en">
+<title>Aplicaciones - Módulo SSO</title>
+<!--/*/ <th:block th:include="fragments/head :: head"></th:block> /*/-->
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+</head>
+<body>
+	<!--/*/ <th:block th:include="fragments/header :: header"></th:block> /*/-->
+	<div class="row layout">
+		<div class="col-lg-2 layout-left">
+			<!--/*/ <th:block th:include="fragments/layout-left :: layout-left"></th:block> /*/-->
+		</div>
+		<div class="col-lg-8 layout-rigth">
+			<div class="col-lg-12">
+				<nav aria-label="breadcrumb">
+					<ol class="breadcrumb">
+						<li class="breadcrumb-item"><a th:href="@{/sso}">Inicio</a></li>
+						<li class="breadcrumb-item active" aria-current="page">Aplicaciones</li>
+					</ol>
+				</nav>
+			</div>
+			<div th:fragment="listaaplicacionesinclude">
+				<div class="col-lg-12">
+					<div class="row">
+						<div class="col-lg-12 layout-title">
+							<h3>LISTA DE APLICACIONES</h3>
+						</div>
+						<div class="col-lg-12">
+							<br/><br/>
+						</div>
+						<div class="col-lg-12">
+							<div class="plus">
+								<a href="#" th:href="@{/sso/aplicacion/new}">
+									<span class="glyphicon glyphicon-plus-sign ico-colornew" 
+									data-toggle="tooltip" title="Nueva Aplicación"></span>
+								</a>
+							</div>
+						</div>
+						<div class="col-lg-12">
+							<table id="myDataTable" class="table table-hover">
+								<thead>
+									<tr>
+										<td class="text-center"><b>Identificador</b></td>
+										<td class="text-center"><b>Nombre Aplicación</b></td>
+										<td class="text-center"><b>Estado</b></td>
+										<td class="text-center">
+											<b>Ver</b>
+										</td>
+										<td class="text-center">
+											<b>Editar</b>
+										</td>
+										<td class="text-center">
+											<b>Eliminar</b>
+										</td>
+									</tr>
+								</thead>
+								<div th:if="${#lists.isEmpty(aplicaciones)}">
+									<tbody>
+										<tr>
+											<td colspan="6" class="text-center">
+												En el sistema aún no contiene aplicaciones
+											</td>
+										</tr>
+									</tbody>
+								</div>
+								<div th:if="${not #lists.isEmpty(aplicaciones)}">
+									<tbody>
+										<tr th:each="aplicacion : ${aplicaciones}">
+											<td class="text-center" th:text="${aplicacion.clientId}">Identificador</td>
+											<td class="text-center" th:text="${aplicacion.name}">Nombre Aplicación</td>
+											<td class="text-center">
+												<span th:if="${aplicacion.enabled}">Activa</span>
+												<span th:if="${not aplicacion.enabled}">Inactiva</span>
+											</td>
+											<td class="text-center">
+												<a th:href="@{/sso/aplicacion/}+${aplicacion.id+'/ver'}">
+													<span class="glyphicon glyphicon-eye-open ico-colorlist" 
+													data-toggle="tooltip" title="Ver"></span>
+												</a>
+											</td>
+											<td class="text-center">
+												<a th:href="@{/sso/aplicacion/edit/}+${aplicacion.id}">
+													<span class="glyphicon glyphicon-pencil ico-colorlist" 
+													data-toggle="tooltip" title="Editar"></span>
+												</a>
+											</td>
+											<td class="text-center">
+												<a th:href="@{/sso/aplicacion/delete/}+${aplicacion.id}" class="delete">
+													<span class="glyphicon glyphicon-remove-sign ico-colorlist" 
+													data-toggle="tooltip" title="Eliminar"></span>
+												</a>
+											</td>
+										</tr>
+									</tbody>
+								</div>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!--/*/ <th:block th:include="fragments/footer :: footer"></th:block> /*/-->
+	<script type="text/javascript">
+        $(document).ready(function(){
+
+            $('#myDataTable').DataTable({
+                "ordering": false,
+                "language": {
+                    "lengthMenu": "Mostrar _MENU_ registros por página",
+                    "zeroRecords": "No hay registros para mostrar",
+                    "info": "Página _PAGE_ de _PAGES_",
+                    "infoEmpty": "No hay registros disponibles",
+                    "infoFiltered": "(Filtrado desde _MAX_ total)",
+                    "paginate": {
+                        "previous": "Ant.",
+                        "next": "Sig.",
+                        "first": "Primer"
+                    },
+                    "search": "Buscar:",
+                }
+            });
+
+        });
+
+	</script>
+</body>
+</html>

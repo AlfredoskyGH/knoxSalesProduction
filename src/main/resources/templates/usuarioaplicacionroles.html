@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head lang="en">
+<title>Módulo SSO - Usuario-Aplicación</title>
+<!--/*/ <th:block th:include="fragments/head :: head"></th:block> /*/-->
+</head>
+<body>
+	<!--/*/ <th:block th:include="fragments/header :: header"></th:block> /*/-->
+	<div class="row layout">
+		<div class="col-lg-2 layout-left">
+			<!--/*/ <th:block th:include="fragments/layout-left :: layout-left"></th:block> /*/-->
+		</div>
+		<div class="col-lg-8 layout-rigth">
+			<div class="col-lg-12">
+				<nav aria-label="breadcrumb">
+					<ol class="breadcrumb">
+						<li class="breadcrumb-item"><a th:href="@{/sso}">Home</a></li>
+						<li class="breadcrumb-item"><a th:href="@{/sso/usuarios}">Usuarios</a></li>
+						<li class="breadcrumb-item active" aria-current="page">
+							<a th:href="@{/sso/usuario/}+ ${userSso.id + '/ver'}">
+								<span th:text="${userSso.username}"></span></a></li>
+						<li class="breadcrumb-item active" aria-current="page">
+							<span th:text="${aplicacion.name}" disabled="disabled"></span></li>
+					</ol>
+				</nav>
+			</div>
+			<!-- Datos Usuario -->
+			<!--/*/ <th:block th:include="usuarioshowresume :: usuarioshow"></th:block> /*/-->
+			
+			<!-- Datos Aplicacion -->
+			<!--/*/ <th:block th:include="aplicacionshowresume :: aplicacionshowresume"></th:block> /*/-->
+			
+			<!-- Agregar Aplicacion vinculadas a la aplicacion-->
+			<!--/*/ <th:block th:include="vincularrolesusuario :: roleAddUser"></th:block> /*/-->
+			<div class="col-lg-12">
+				<div class="row">
+					<br/>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!--/*/ <th:block th:include="fragments/footer :: footer"></th:block> /*/-->
+</body>
+</html>
