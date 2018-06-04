@@ -92,10 +92,6 @@
     display: none;
 }
 
-.loading {
-    background: transparent url('../img/loading.gif') no-repeat scroll center center content-box !important;
-}
-
 .wrap-indicator {
     font-weight: bold;
     color: #245269;

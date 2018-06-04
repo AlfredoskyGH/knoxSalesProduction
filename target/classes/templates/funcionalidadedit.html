@@ -17,11 +17,11 @@
 						<li class="breadcrumb-item"><a th:href="@{/sso}">Home</a></li>
 						<li class="breadcrumb-item"><a th:href="@{/sso/aplicaciones}">Aplicaciones</a></li>
 						<li class="breadcrumb-item"><a
-							th:href="${'/sso/aplicacion/' + funcionalidad.roleApp.aplicationClient.id+'/ver'}">
+							th:href="@{/sso/aplicacion/} + ${funcionalidad.roleApp.aplicationClient.id+'/ver'}">
 								<span th:text="${funcionalidad.roleApp.aplicationClient.clientId}"></span>
 						</a></li>
 						<li class="breadcrumb-item active"><a
-							th:href="${'/sso/aplicacion/' + funcionalidad.roleApp.aplicationClient.id+'/rol/'+funcionalidad.roleApp.id+'/ver'}">
+							th:href="@{/sso/aplicacion} + ${funcionalidad.roleApp.aplicationClient.id+'/rol/'+funcionalidad.roleApp.id+'/ver'}">
 								<span th:text="${funcionalidad.roleApp.name}"></span>
 						</a></li>
 						<li class="breadcrumb-item active" aria-current="page"><span

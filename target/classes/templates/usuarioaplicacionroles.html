@@ -17,7 +17,7 @@
 						<li class="breadcrumb-item"><a th:href="@{/sso}">Home</a></li>
 						<li class="breadcrumb-item"><a th:href="@{/sso/usuarios}">Usuarios</a></li>
 						<li class="breadcrumb-item active" aria-current="page">
-							<a th:href="${'/sso/usuario/'+ userSso.id + '/ver'}">
+							<a th:href="@{/sso/usuario/}+ ${userSso.id + '/ver'}">
 								<span th:text="${userSso.username}"></span></a></li>
 						<li class="breadcrumb-item active" aria-current="page">
 							<span th:text="${aplicacion.name}" disabled="disabled"></span></li>

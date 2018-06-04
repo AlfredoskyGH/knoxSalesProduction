@@ -162,13 +162,13 @@
                                                         <span th:if="${not schedule.enabled}">Inactiva</span>
                                                     </td>
                                                     <td class="text-center">
-                                                        <a th:href="${'/sso/planificador/edit/' + schedule.id}">
+                                                        <a th:href="@{/sso/planificador/edit/} + ${schedule.id}">
                                                 <span class="glyphicon glyphicon-pencil ico-colorlist"
                                                       data-toggle="tooltip" title="Editar"></span>
                                                         </a>
                                                     </td>
                                                     <td class="text-center">
-                                                        <a th:href="${'/sso/planificador/delete/' + schedule.id}" class="delete">
+                                                        <a th:href="@{/sso/planificador/delete/} + ${schedule.id}" class="delete">
                                                 <span class="glyphicon glyphicon-remove-sign ico-colorlist"
                                                       data-toggle="tooltip" title="Eliminar"></span>
                                                         </a>

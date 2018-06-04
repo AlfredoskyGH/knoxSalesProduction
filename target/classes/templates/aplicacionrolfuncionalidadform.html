@@ -17,7 +17,7 @@
 						<li class="breadcrumb-item"><a href="#" th:href="@{/sso}">Home</a></li>
 						<li class="breadcrumb-item"><a href="#"	th:href="@{/sso/aplicaciones}">Aplicaciones</a></li>
 						<li class="breadcrumb-item">
-							<a href="#" th:href="${'/sso/aplicacion/' +  aplicacion.id +'/ver'}"
+							<a href="#" th:href="@{/sso/aplicacion/}+${aplicacion.id + '/ver'}"
 							   th:text="${aplicacion.name}"></a></li>
 						<li class="breadcrumb-item active" th:text="${rol.name}"></li>
 					</ol>

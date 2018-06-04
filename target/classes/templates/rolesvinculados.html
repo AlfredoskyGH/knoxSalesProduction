@@ -54,13 +54,13 @@
 									<td align="center"><span th:if="${aplicacion.enabled}">Activa</span>
 										<span th:if="${not aplicacion.enabled}">Inactiva</span></td>
 									<td align="center">
-										<a th:href="${'/sso/usuario/aplicacion/delete/' + aplicacion.id}" class="delete">
+										<a th:href="@{/sso/usuario/aplicacion/delete/}+${aplicacion.id}" class="delete">
 											<span class="glyphicon glyphicon-remove-sign ico-colorlist" 
 											data-toggle="tooltip" title="Desvincular"></span>
 										</a>
 									</td>
 									<td align="center">
-										<a th:href="${'/sso/usuario/'+aplicacion.userSso.id+'/aplicacion/' + aplicacion.id+'/ver'}">
+										<a th:href="@{/sso/usuario/}+${aplicacion.userSso.id+'/aplicacion/' + aplicacion.id+'/ver'}">
 											<span class="glyphicon glyphicon-list-alt ico-colorlist" 
 											data-toggle="tooltip" title="Roles"></span>
 										</a>

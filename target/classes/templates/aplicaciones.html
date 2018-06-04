@@ -32,7 +32,7 @@
 						</div>
 						<div class="col-lg-12">
 							<div class="plus">
-								<a href="#" th:href="${'/sso/aplicacion/new'}">
+								<a href="#" th:href="@{/sso/aplicacion/new}">
 									<span class="glyphicon glyphicon-plus-sign ico-colornew" 
 									data-toggle="tooltip" title="Nueva Aplicación"></span>
 								</a>
@@ -75,19 +75,19 @@
 												<span th:if="${not aplicacion.enabled}">Inactiva</span>
 											</td>
 											<td class="text-center">
-												<a th:href="${'/sso/aplicacion/' + aplicacion.id+'/ver'}">
+												<a th:href="@{/sso/aplicacion/}+${aplicacion.id+'/ver'}">
 													<span class="glyphicon glyphicon-eye-open ico-colorlist" 
 													data-toggle="tooltip" title="Ver"></span>
 												</a>
 											</td>
 											<td class="text-center">
-												<a th:href="${'/sso//aplicacion/edit/' + aplicacion.id}">
+												<a th:href="@{/sso/aplicacion/edit/}+${aplicacion.id}">
 													<span class="glyphicon glyphicon-pencil ico-colorlist" 
 													data-toggle="tooltip" title="Editar"></span>
 												</a>
 											</td>
 											<td class="text-center">
-												<a th:href="${'/sso/aplicacion/delete/' + aplicacion.id}" class="delete">
+												<a th:href="@{/sso/aplicacion/delete/}+${aplicacion.id}" class="delete">
 													<span class="glyphicon glyphicon-remove-sign ico-colorlist" 
 													data-toggle="tooltip" title="Eliminar"></span>
 												</a>
@@ -109,7 +109,7 @@
             $('#myDataTable').DataTable({
                 "ordering": false,
                 "language": {
-                    "lengthMenu": "Mostrar _MENU_ registros por pagina",
+                    "lengthMenu": "Mostrar _MENU_ registros por página",
                     "zeroRecords": "No hay registros para mostrar",
                     "info": "Página _PAGE_ de _PAGES_",
                     "infoEmpty": "No hay registros disponibles",

@@ -68,7 +68,7 @@
 												<span th:if="${rol.enabled}">Activo</span>
 												<span th:if="${not rol.enabled}">Inactivo</span></td>
 											<td align="center">
-												<a	th:href="${'/sso/usuario/'+rol.aplicationClient.userSso.id+'/aplicacion/'+rol.aplicationClient.id+'/rol/delete/' + rol.id}"
+												<a	th:href="@{/sso/usuario/}+${rol.aplicationClient.userSso.id+'/aplicacion/'+rol.aplicationClient.id+'/rol/delete/' + rol.id}"
 												class="delete"> 
 													<span class="glyphicon glyphicon-remove-sign ico-colorlist"
 													data-toggle="tooltip" title="Desvincular Rol"></span>

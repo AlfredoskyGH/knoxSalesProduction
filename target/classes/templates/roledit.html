@@ -17,7 +17,7 @@
 						<li class="breadcrumb-item"><a th:href="@{/sso}">Home</a></li>
 						<li class="breadcrumb-item"><a th:href="@{/sso/aplicaciones}">Aplicaciones</a></li>
 						<li class="breadcrumb-item"><a
-							th:href="${'/sso/aplicacion/' + rol.aplicationClient.id+'/ver'}">
+							th:href="@{/sso/aplicacion/} + ${rol.aplicationClient.id+'/ver'}">
 								<span class="" th:text="${rol.aplicationClient.clientId}"></span>
 						</a></li>
 						<li class="breadcrumb-item active" aria-current="page"><span

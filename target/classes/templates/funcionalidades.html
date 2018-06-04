@@ -36,13 +36,13 @@
 									<span th:if="${not funcionalidad.enabled}">Inactiva</span>
 								</td>
 								<td align="center">
-									<a th:href="${'/sso/aplicacion/'+funcionalidad.roleApp.aplicationClient.id+'/rol/'+funcionalidad.roleApp.id+'/funcionalidad/edit/'+funcionalidad.id}">
+									<a th:href="@{/sso/aplicacion/}+${funcionalidad.roleApp.aplicationClient.id+'/rol/'+funcionalidad.roleApp.id+'/funcionalidad/edit/'+funcionalidad.id}">
 										<span class="glyphicon glyphicon-pencil ico-colorlist" 
 										data-toggle="tooltip" title="Editar"></span>
 									</a>
 								</td>
 								<td align="center">
-									<a th:href="${'/sso/aplicacion/'+funcionalidad.roleApp.aplicationClient.id+'/rol/'+funcionalidad.roleApp.id+'/funcionalidad/delete/'+funcionalidad.id}"
+									<a th:href="@{/sso/aplicacion/}+${funcionalidad.roleApp.aplicationClient.id+'/rol/'+funcionalidad.roleApp.id+'/funcionalidad/delete/'+funcionalidad.id}"
 										class="delete">
 										<span class="glyphicon glyphicon-remove-sign ico-colorlist" 
 										data-toggle="tooltip" title="Eliminar"></span>
